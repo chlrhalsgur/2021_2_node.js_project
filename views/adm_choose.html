@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>골라 골라</title>
+    <style>
+        .bluetop {
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        .bluetop th {
+            color: rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th,
+        .bluetop td {
+            padding: 10px;
+            border: 1px solid rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th:first-child,
+        .bluetop td:first-child {
+            border-left: 0;
+        }
+
+        .bluetop th:last-child,
+        .bluetop td:last-child {
+            border-right: 0;
+        }
+    </style>
+    {% if delete_succ %}
+    <script>alert('정상적으로 삭제 되었습니다.');</script>
+    {% endif %}
+</head>
+
+<body>
+    <h1>관리자 페이지</h1>
+    <center>
+        <table border="1" class="bluetop">
+            <tr>
+                <td><a href="/adm/adm_meetingList">회의 목록 바로가기</a> <!-- 자료 입력으로 이동 ()-->
+                </td>
+                <td><a href="/adm/adm_index">회원 목록 바로가기</a> <!-- 자료 입력으로 이동 ()-->
+                </td>
+            </tr>
+        </table>
+    </center>
+
+</body>
+
+</html>

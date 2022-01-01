@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .blueone {
+            border-collapse: collapse;
+            text-align: center;
+
+        }
+
+        .blueone th {
+            padding-left: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: rgb(0, 0, 0);
+            text-align: left;
+            background: #f0f6f9;
+        }
+
+        .blueone td {
+            color: rgb(153, 153, 153);
+            padding: 10px;
+            border-bottom: 1px solid rgb(0, 0, 0);
+        }
+
+        .blueone tr:hover td {
+            color: #004;
+        }
+
+        .bluetop {
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        .bluetop th {
+            color: rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th,
+        .bluetop td {
+            padding: 10px;
+            border: 1px solid rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th:first-child,
+        .bluetop td:first-child {
+            border-left: 0;
+        }
+
+        .bluetop th:last-child,
+        .bluetop td:last-child {
+            border-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>회의 관리</h1>
+    <form method=post>
+        <table border="1" class="bluetop">
+            <tr>
+                <td><a href="/adm/adm_index">회원목록</a></td>
+                <td><a href="/adm/adm_searchMeeting">회의찾기</a></td>
+                <td><a href="/adm/adm_adminLogout">로그아웃</a></td>
+            </tr>
+        </table>
+    </form>
+    <!-- <form action="#" method="post"> -->
+        <table width="100%" border="2" class="blueone">
+            <caption>
+                <h2>회의 목록</h2>
+            </caption>
+            <!-- {{data.code}}	{{data.host_id}}	{{data.date}}	{{data.time}}	{{data.hall}}	{{data.room_num}}	{{data.num}}	{{data.title}}	 -->
+            <tr>
+                <th>삭제</th>
+                <th>CODE</th>
+                <th>HOST</th>
+                <th>날짜</th>
+                <th>시간</th>
+                <th>건물</th>
+                <th>강의실</th>
+                <th>인원</th>
+                <th>주제</th>
+                <th>세부내용</th>
+            </tr>
+            <form action="/adm/delete_conf?_method=DELETE" method="POST">
+                {% for data in data_list %}
+                    <tr style="width: 50%;">
+                        <td><input type="radio" name="code" value="{{data.dataValues.code}}"></td>
+                        <td>{{data.dataValues.code}}</td>
+                        <td>{{data.dataValues.host_id}}</td>
+                        <td>{{data.dataValues.date}}</td>
+                        <td>{{data.dataValues.time}}</td>
+                        <td>{{data.dataValues.hall}}</td>
+                        <td>{{data.dataValues.room_num}}</td>
+                        <td>{{data.dataValues.num}}</td>
+                        <td>{{data.dataValues.title}}</td>
+                        <td>{{data.dataValues.detail}}</td>
+                    </tr>
+                {% endfor %}
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="회의 정보 삭제">
+            </form>
+        </table>
+    <!-- </form> -->
+</body>
+
+</html>

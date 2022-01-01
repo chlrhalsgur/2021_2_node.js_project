@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 로그인</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .bluetop {
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        .bluetop th {
+            color: rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th,
+        .bluetop td {
+            padding: 10px;
+            border: 1px solid rgb(0, 0, 0);
+        }
+
+        .bluetop th:first-child,
+        .bluetop td:first-child {
+            border-left: 0;
+        }
+
+        .bluetop th:last-child,
+        .bluetop td:last-child {
+            border-right: 0;
+        }
+    </style>
+    {% if is_adm == false %}
+    <script>alert('관리자 권한이 필요합니다.');</script>
+    {% endif %}
+    {% if fail %}
+    <script>alert('로그인 실패');</script>
+    {% endif %}
+</head>
+
+<body>
+    <h1>관리자 로그인 페이지</h1>
+    <form action="/adm/signin_adm" method="post">
+        <table border=1 class="bluetop">
+            <tr>
+                <td><label>관리자 ID</label></td>
+                <td><input type="text" name="id" id="admin_id" required /></td>
+            </tr>
+            <tr>
+                <td><label>관리자 PW</label></td>
+                <td><input type="password" name="pwd" id="pwd" required /></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="로그인" id="signinButton">
+        <input type="reset" value="초기화" />
+    </form>
+
+    <script src="js/login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+input, textarea, select, FORM
+ {
+   font-family:고딕;
+  font-size:1em;
+  border-radius:5px;
+  
+ }
+
+ table{
+  border-spacing: 2px;
+  border-collapse: separate;
+ }
+ .scheduleList {
+   width: 60%;
+   margin: auto;
+ }
+
+ div#menu {
+   position: absolute;
+   top: 50%;
+ }

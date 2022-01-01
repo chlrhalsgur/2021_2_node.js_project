@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>회의실 참가</title>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../css/styles1.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sign-up.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/table.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    {% if duplication %}
+    <script>alert('이미 참여 중인 회의입니다.');</script>
+    {% endif %}
+</head>
+
+<body id="body">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/" style="color: black;">HOME</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="ftco-section">
+        <div class="container" id="formReserve">
+            <!-- Project details-->
+            <h2 class="text-uppercase" style="font-size: xxx-large;">Meeting Room</h2>
+            <p class="item-intro text-muted" style="font-size: larger;">Participation</p>
+            <div class="row">
+                <div class="col-lg-4">
+                    <!-- 날짜 -->
+                    <form action="/participating/search_p" method="get">
+                        <div class="card mb-4">
+                            <div class="card-header" style="font-weight: bold;">회의 날짜 </div>
+                            <div class="card-body">
+                                날짜: <input type="date" name='currentDate' required> <br><br>
+                                시간: <select name="meetingTime" required>
+                                    <option selected disabled> --선택-- </option>
+                                    <option value="09:00 ~ 10:15"> 09:00 ~ 10:15 </option>
+                                    <option value="10:25 ~ 11:40"> 10:25 ~ 11:40 </option>
+                                    <option value="13:30 ~ 14:45"> 13:30 ~ 14:45 </option>
+                                    <option value="14:55 ~ 16:10"> 14:55 ~ 16:10 </option>
+                                    <option value="16:20 ~ 17:35"> 16:20 ~ 17:35 </option>
+                                </select>
+                            </div>
+                            <input type="submit" value="날짜 선택" id="chooseDate"><br>
+                        </div>
+                    </form>
+                </div>
+                <!-- 회의실 -->
+                <div class="col-lg-8">
+                    <form action="/participating/select_p" method="post">
+                        <div class="card mb-4">
+                            <table width="100%" class="scrolltable">
+                                <thead class="card-header">
+                                    <tr>
+                                        <th>CODE</th>
+                                        <th>호스트</th>
+                                        <th>날짜</th>
+                                        <th>시간</th>
+                                        <th>건물</th>
+                                        <th>강의실</th>
+                                        <th>인원</th>
+                                        <th>주제</th>
+                                        <th>참가</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in data_list %}
+                                    <tr>
+                                        <td>{{data.code}}</td>
+                                        <td>{{data.host_id}}</td>
+                                        <td>{{data.date}}</td>
+                                        <td>{{data.time}}</td>
+                                        <td>{{data.hall}}</td>
+                                        <td>{{data.room_num}}</td>
+                                        <td>{{data.dataValues.count_code}}/{{data.num}}</td>
+                                        <td>{{data.title}}</td>
+                                        <td><input type="radio" value="{{data.code}}" name="code" id="participation">
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <input type="submit" value="선택" class="join">
+                    </form>
+                </div>
+            </div>
+    </section>
+    <script src="js/joinList.js"></script>
+</body>
+
+</html>

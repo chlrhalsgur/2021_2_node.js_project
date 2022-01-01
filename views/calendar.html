@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>캘린더</title>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../css/styles1.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
+
+<body id="body">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/" style="color: black;">HOME</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="ftco-section">
+        <div class="container" id="formReserve">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Calendar</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content w-100">
+                        <div class="calendar-container">
+                            <div class="calendar">
+                                <div class="year-header">
+                                    <span class="left-button fa fa-chevron-left" id="prev">
+                                    </span>
+                                    <span class="year" id="label"></span>
+                                    <span class="right-button fa fa-chevron-right" id="next">
+                                    </span>
+                                </div>
+                                <table class="months-table w-100">
+                                    <tbody>
+                                        <tr class="months-row">
+                                            <td class="month">1월</td>
+                                            <td class="month">2월</td>
+                                            <td class="month">3월</td>
+                                            <td class="month">4월</td>
+                                            <td class="month">5월</td>
+                                            <td class="month">6월</td>
+                                            <td class="month">7월</td>
+                                            <td class="month">8월</td>
+                                            <td class="month">9월</td>
+                                            <td class="month">10월</td>
+                                            <td class="month">11월</td>
+                                            <td class="month">12월</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="days-table w-100">
+                                    <td class="day">일</td>
+                                    <td class="day">월</td>
+                                    <td class="day">화</td>
+                                    <td class="day">수</td>
+                                    <td class="day">목</td>
+                                    <td class="day">금</td>
+                                    <td class="day">토</td>
+                                </table>
+                                <div class="frame">
+                                    <table class="dates-table w-100">
+                                        <tbody class="tbody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="events-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 전체 일정 보기 -->
+            <div class="scheduleList">
+                <div class="card mb-6">
+                    <table class="bluetop">
+                        <h5 class="card-header">내가 개설한 회의</h5>
+                        <tr>
+                            <th>날짜</th>
+                            <th>시간</th>
+                            <th>건물</th>
+                            <!-- <th>회의실</th> -->
+                            <th>회의명</th>
+                            <!-- <th>인원</th> -->
+                            <th>호스트</th>
+                            <th>세부내용</th>
+                            <th>상세 정보 보기</th>
+                        </tr>
+                        {% for data in data_list_hosting %}
+                        <tr>
+                            <td>{{data.dataValues.date}}</td>
+                            <td>{{data.dataValues.time}}</td>
+                            <td>{{data.dataValues.hall}}</td>
+                            <td>{{data.dataValues.title}}</td>
+                            <td>{{data.dataValues.host_id}}</td>
+                            <td>{{data.dataValues.detail}}</td>
+                            <td><form action="/schedule/{{data.dataValues.code}}" method="post"><input type="submit" value="상세정보"></form></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <br>
+                <div class="card mb-6">
+                    <table class="bluetop">
+                        <h5 class="card-header">회의 목록</h5>
+                        <tr>
+                            <th>날짜</th>
+                            <th>시간</th>
+                            <th>건물</th>
+                            <!-- <th>회의실</th> -->
+                            <th>회의명</th>
+                            <!-- <th>인원</th> -->
+                            <th>호스트</th>
+                            <!-- <th>세부내용</th> -->
+                        </tr>
+                        {% for data in data_list %}
+                        <tr>
+                            <td>{{data.dataValues.Hosting.date}}</td>
+                            <td>{{data.dataValues.Hosting.time}}</td>
+                            <td>{{data.dataValues.Hosting.hall}}</td>
+                            <td>{{data.dataValues.Hosting.title}}</td>
+                            <td>{{data.dataValues.Hosting.host_id}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/checkAll.js"></script>
+    <script src="js/calendatList.js"></script>
+</body>
+
+</html>

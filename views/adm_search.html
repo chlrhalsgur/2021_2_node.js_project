@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 검색</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .blueone {
+            border-collapse: collapse;
+            text-align: center;
+
+        }
+
+        .blueone th {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            background: #f0f6f9;
+        }
+
+        .blueone td {
+            color: rgb(153, 153, 153);
+            padding: 10px;
+            border-bottom: 1px solid rgb(0, 0, 0);
+        }
+
+        .blueone tr:hover td {
+            color: #004;
+        }
+        .bluetop {
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid black;
+            background: #f0f6f9;
+        }
+
+        .bluetop th {
+            color: rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th,
+        .bluetop td {
+            padding: 10px;
+            border: 1px solid rgb(0, 0, 0);
+            
+        }
+
+        .bluetop th:first-child,
+        .bluetop td:first-child {
+            border-left: 0;
+        }
+
+        .bluetop th:last-child,
+        .bluetop td:last-child {
+            border-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>회원 검색</h1>
+    <table border="1" class="bluetop">
+        <tr>
+            <td><a href="/adm/adm_index">회원목록</a> <!-- 자료 입력으로 이동 ()-->
+            </td>
+            <!-- <td><a href="/adm_newInsert">회원생성</a> <!-- 자료 입력으로 이동 ()-->
+            </td> -->
+        </tr>
+    </table>
+    <br>
+        <fieldset>
+            <table>
+                <form action="/adm/adm_search_user" method="POST">
+                    <tr>
+                        <td><label>회원ID</label> </td>
+                        <td><input type="text" name="search_id" /></td>
+                        <td><input type="submit" value="검색" /></td>
+                    </tr>
+                </form>
+            </table>
+
+            <table width="100%" border="1" class="blueone">
+                <tr>
+                    <!-- <th>삭제</th> -->
+                    <th>회원 ID</th>
+                    <th>비밀번호</th>
+                    <th>회원 이름</th>
+                    <th>회원 이메일</th>
+                    <th>전화번호</th>
+                    <th>회원 생일</th>
+                    <th>회원 사진</th>
+                </tr>
+                {% for data in user_data %}
+                    <tr>
+                        <!-- <td><input type="submit" value="Delete"></td> -->
+                        <td>{{data.dataValues.id}}</td> 
+                        <td>{{data.dataValues.pwd}}</td>
+                        <td>{{data.dataValues.name}}</td>
+                        <td>{{data.dataValues.email}}</td>
+                        <td>{{data.dataValues.phone}} </td>
+                        <td>{{data.dataValues.birth}} </td>
+                        <td>{{data.dataValues.image}} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </fieldset>
+    <script src="js/search.js"></script>
+</body>
+
+</html>

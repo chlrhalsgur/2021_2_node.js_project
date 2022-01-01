@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회의 검색</title>
+    <style>
+        .blueone {
+            border-collapse: collapse;
+            text-align: center;
+
+        }
+
+        .blueone th {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            background: #f0f6f9;
+        }
+
+        .blueone td {
+            color: rgb(153, 153, 153);
+            padding: 10px;
+            border-bottom: 1px solid rgb(0, 0, 0);
+        }
+
+        .blueone tr:hover td {
+            color: #004;
+        }
+
+        .bluetop {
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid black;
+            background: #f0f6f9;
+        }
+
+        .bluetop th {
+            color: rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th,
+        .bluetop td {
+            padding: 10px;
+            border: 1px solid rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th:first-child,
+        .bluetop td:first-child {
+            border-left: 0;
+        }
+
+        .bluetop th:last-child,
+        .bluetop td:last-child {
+            border-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>회원 검색</h1>
+    <table border="1" class="bluetop">
+        <tr>
+            <td><a href="/adm/adm_index">회의목록</a> <br><!-- 자료 입력으로 이동 ()-->
+            </td>
+        </tr>
+    </table>
+    <br>
+    <fieldset>
+        <table>
+            <form action="/adm/adm_search_con" method="POST">
+                <tr>
+                    <td><label>회의 CODE</label> </td>
+                    <td><input type="text" name="search_data" /></td>
+                    <td><input type="submit" value="검색" /></td>
+                </tr>
+            </form>
+        </table>
+
+        <table width="100%" border="1" class="blueone">
+            <tr>
+                <!-- <th>삭제</th> -->
+                <th>CODE</th>
+                <th>HOST</th>
+                <th>날짜</th>
+                <th>시간</th>
+                <th>건물</th>
+                <th>강의실</th>
+                <th>인원</th>
+                <th>주제</th>
+                <th>세부내용</th>
+            </tr>
+            {% for data in hosting_data %}
+            <tr>
+                <!-- <td><input type="submit" value="Delete"></td> -->
+                <td>{{data.dataValues.code}}</td>
+                <td>{{data.dataValues.host_id}}</td>
+                <td>{{data.dataValues.date}}</td>
+                <td>{{data.dataValues.time}}</td>
+                <td>{{data.dataValues.hall}}</td>
+                <td>{{data.dataValues.room_num}}</td>
+                <td>{{data.dataValues.num}}</td>
+                <td>{{data.dataValues.title}}</td>
+                <td>{{data.dataValues.detail}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </fieldset>
+</body>
+
+</html>

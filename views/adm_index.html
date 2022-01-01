@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 관리</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .blueone {
+            border-collapse: collapse;
+            text-align: center;
+
+        }
+
+        .blueone th {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            background: #f0f6f9;
+        }
+
+        .blueone td {
+            color: rgb(153, 153, 153);
+            padding: 10px;
+            border-bottom: 1px solid rgb(0, 0, 0);
+        }
+
+        .blueone tr:hover td {
+            color: #004;
+        }
+
+        .bluetop {
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        .bluetop th {
+            color: rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th,
+        .bluetop td {
+            padding: 10px;
+            border: 1px solid rgb(0, 0, 0);
+            background: #f0f6f9;
+        }
+
+        .bluetop th:first-child,
+        .bluetop td:first-child {
+            border-left: 0;
+        }
+
+        .bluetop th:last-child,
+        .bluetop td:last-child {
+            border-right: 0;
+        }
+    </style>
+    {% if delete_succ %}
+    <script>alert('정상적으로 삭제 되었습니다.');</script>
+    {% endif %}
+</head>
+
+<body>
+    <h1>회원 관리</h1>
+    <form method=post>
+        <table border="1" class="bluetop">
+            <tr>
+                <!-- <td><a href="/adm_newInsert">회원생성</a> <!-- 자료 입력으로 이동 ()-->
+                </td> -->
+                <td><a href="/adm/adm_search">회원찾기</a> <!-- 자료 입력으로 이동 ()-->
+                </td>
+                <td><a href="/adm/adm_meetingList">회의목록</a></td>
+                <td><a href="/adm/adm_adminLogout" onclick="req.session.destroy();">로그아웃</a></td>
+            </tr>
+        </table>
+    </form>
+    <table width="100%" border="2" class="blueone">
+        <caption>
+            <h2>회원 목록</h2>
+        </caption>
+        <tr>
+            <th>삭제</th>
+            <th>회원 ID</th>
+            <th>비밀번호</th>
+            <th>회원 이름</th>
+            <th>회원 이메일</th>
+            <th>전화번호</th>
+            <th>회원 생일</th>
+            <th>회원 사진</th>
+        </tr>
+        <form action="/adm/delete_user?_method=DELETE" method="POST">
+            {% for data in user_data %}
+                <tr style="width: 50%;">
+                    <td><input type="radio" name="id" value="{{data.dataValues.id}}"></td>
+                    <td>{{data.dataValues.id}}</td> <!-- 값 추출-->
+                    <td>{{data.dataValues.pwd}}</td>
+                    <td>{{data.dataValues.name}}</td>
+                    <td>{{data.dataValues.email}}</td>
+                    <td>{{data.dataValues.phone}}</td>
+                    <td>{{data.dataValues.birth}}</td>
+                    <td>{{data.dataValues.image}}</td>
+                </tr>
+            {% endfor %}
+            <input type="submit" value="회원 정보 삭제">
+        </form>
+    </table>
+</body>
+
+</html>
